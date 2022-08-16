@@ -1,18 +1,19 @@
 package pages;
 
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import runner.RunCucumberTest;
 import support.Utils;
 
-public class CadastroPage extends Utils {
-    WebDriver driver;
+public class CadastroPage extends RunCucumberTest {
 
     private By titleM = By.id("id_gender1");
     private By titleF = By.id("id_gender2");
     private By first_name_field = By.id("customer_firstname");
-    private By last_name_field  = By.id("customer_lastname");
+    private By last_name_field = By.id("customer_lastname");
     private By password_field = By.id("passwd");
     private By select_day_field = By.id("days");
     private By select_month_field = By.id("months");
@@ -25,75 +26,70 @@ public class CadastroPage extends Utils {
     private By submit_button = By.id("submitAccount");
 
 
+    public void selectTitle(Integer type) {
 
+        Utils.waitElementBePresent(titleM, 20);
 
-    public CadastroPage(WebDriver driver) {
-
-        this.driver = driver;
-    }
-
-    public void selectTitle (Integer type){
-
-        waitElementBePresent(titleM, 20);
-
-        if (type == 1){
-            driver.findElement(titleM).click();
-        }else if (type == 2) {
-            driver.findElement(titleF).click();
+        if (type == 1) {
+            getDriver().findElement(titleM).click();
+        } else if (type == 2) {
+            getDriver().findElement(titleF).click();
         }
     }
 
-    public void fillName (String name){
-        driver.findElement(first_name_field).sendKeys(name);
+    public void fillName(String name) {
+        getDriver().findElement(first_name_field).sendKeys(name);
     }
 
-    public void fillLastName (String lastName){
-        driver.findElement(last_name_field).sendKeys(lastName);
+    public void fillLastName(String lastName) {
+        getDriver().findElement(last_name_field).sendKeys(lastName);
     }
 
-    public void fillPassword(String pass){
-        driver.findElement(password_field).sendKeys(pass);
+    public void fillPassword(String pass) {
+        getDriver().findElement(password_field).sendKeys(pass);
     }
 
-    public void birthDate (Integer day, Integer months, String years){
-        Select select_day = new Select(driver.findElement(select_day_field));
+    public void birthDate(Integer day, Integer months, String years) {
+        Select select_day = new Select(getDriver().findElement(select_day_field));
         select_day.selectByIndex(day);
 
-        Select select_month = new Select(driver.findElement(select_month_field));
+        Select select_month = new Select(getDriver().findElement(select_month_field));
         select_month.selectByIndex(months);
 
-        Select select_year = new Select(driver.findElement(select_year_field));
+        Select select_year = new Select(getDriver().findElement(select_year_field));
         select_year.selectByValue(years);
     }
 
-    public void fillAddress (String address){
-        driver.findElement(address_field).sendKeys(address);
+    public void fillAddress(String address) {
+        getDriver().findElement(address_field).sendKeys(address);
     }
 
-    public void fillCity (String city){
-        driver.findElement(city_field).sendKeys(city);
+    public void fillCity(String city) {
+        getDriver().findElement(city_field).sendKeys(city);
     }
 
-    public void fillState (String state) {
-        Select select_state = new Select(driver.findElement(state_field));
+    public void fillState(String state) {
+        Select select_state = new Select(getDriver().findElement(state_field));
         select_state.selectByVisibleText(state);
     }
 
-    public void fillPostcode (String postcode){
-        driver.findElement(postcode_field).sendKeys(postcode);
+    public void fillPostcode(String postcode) {
+        getDriver().findElement(postcode_field).sendKeys(postcode);
     }
 
-    public void fillPhone (String phone){
-        driver.findElement(phone_mobile_field).sendKeys(phone);
+    public void fillPhone(String phone) {
+        getDriver().findElement(phone_mobile_field).sendKeys(phone);
     }
 
-    public void clickRegister (){
-        driver.findElement(submit_button).click();
+    public void clickRegister() {
+        getDriver().findElement(submit_button).click();
     }
 
-
-
-
+    public void validateRegister(String nome, String sobrenome) {
+        Utils.waitElementBePresent(By.className("button-search"), 20);
+        String resultadoAtual = getDriver().findElement(By.cssSelector("#header > div.nav > div > div > nav > div:nth-child(1) > a > span")).getText();
+        Assert.assertEquals(nome + " " + sobrenome, resultadoAtual);
+    }
 
 
 }

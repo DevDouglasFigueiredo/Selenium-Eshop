@@ -9,13 +9,16 @@ import runner.RunCucumberTest;
 public class CadastroSteps extends RunCucumberTest {
 
 
-CadastroPage cadastroPage = new CadastroPage(driver);
+    CadastroPage cadastroPage = new CadastroPage();
+
+    String nome = "João";
+    String sobrenome = "Motta";
 
     @Quando("^eu preencho o formulario de cadastro$")
-    public void eu_preencho_o_formulario_de_cadastro()  {
+    public void eu_preencho_o_formulario_de_cadastro() {
         cadastroPage.selectTitle(1);
-        cadastroPage.fillName("Douglas");
-        cadastroPage.fillLastName("Figueiredo");
+        cadastroPage.fillName(nome);
+        cadastroPage.fillLastName(sobrenome);
         cadastroPage.fillPassword("11223344");
         cadastroPage.birthDate(22, 06, "1988");
         cadastroPage.fillAddress("rua da palhoça");
@@ -23,18 +26,17 @@ CadastroPage cadastroPage = new CadastroPage(driver);
         cadastroPage.fillState("Colorado");
         cadastroPage.fillPostcode("88132");
         cadastroPage.fillPhone("+5548996356396");
-        cadastroPage.clickRegister();
 
 
     }
 
     @Quando("^clico em registrar$")
-    public void clico_em_registrar()  {
-
+    public void clico_em_registrar() {
+        cadastroPage.clickRegister();
     }
 
-    @Então("^vejo a mensagem de cadastro realizado com sucesso$")
-    public void vejo_a_mensagem_de_cadastro_realizado_com_sucesso()  {
-
+    @Então("^vejo o cadastro realizado com sucesso$")
+    public void vejo_o_cadastro_realizado_com_sucesso() {
+        cadastroPage.validateRegister(nome, sobrenome);
     }
 }

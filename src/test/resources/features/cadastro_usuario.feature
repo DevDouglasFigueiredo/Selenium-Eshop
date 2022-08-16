@@ -12,4 +12,5 @@
     E acesso o cadastro de usuario
     Quando eu preencho o formulario de cadastro
     E clico em registrar
-    Então vejo a mensagem de cadastro realizado com sucesso
+    Então vejo o cadastro realizado com sucesso
+

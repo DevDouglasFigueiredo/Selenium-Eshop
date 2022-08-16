@@ -12,20 +12,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 @CucumberOptions(
         plugin = {},
         features = "src/test/resources/features",
-        tags = {"@Cadastro-sucesso"},
+        tags = {"~@ignore"},
         glue = {"steps"}
 )
-public class RunCucumberTest {
+public class RunCucumberTest extends RunBase {
 
-    public static WebDriver driver;
-
-    @BeforeClass
-    public static void start (){
-        driver = new ChromeDriver();
-    }
 
     @AfterClass
-    public static void stop (){
-
+    public static void stop() {
+        driver.quit();
     }
 }

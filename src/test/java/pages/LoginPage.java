@@ -2,33 +2,28 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import runner.RunCucumberTest;
 import support.Utils;
 
-public class LoginPage extends Utils {
+public class LoginPage extends RunCucumberTest {
 
-    WebDriver driver;
 
     private By create_email_field = By.id("email_create");
     private By create_email_button = By.id("SubmitCreate");
 
 
-    public LoginPage(WebDriver driver) {
-
-        this.driver = driver;
+    public void acessScreenLogin() {
+        getDriver().get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        Utils.waitElementBePresent(create_email_field, 20);
     }
 
-    public void acessScreenLogin (){
-        driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
-        waitElementBePresent(create_email_field, 20);
-    }
-
-    public void fillEmailCreate(){
-        driver.findElement(create_email_field).sendKeys(getRandomEmail());
+    public void fillEmailCreate() {
+        getDriver().findElement(create_email_field).sendKeys(Utils.getRandomEmail());
 
     }
 
-    public void clickCreateAnAccount (){
-        driver.findElement(create_email_button).click();
+    public void clickCreateAnAccount() {
+        getDriver().findElement(create_email_button).click();
     }
 
 
